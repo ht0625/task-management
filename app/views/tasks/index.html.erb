@@ -1,6 +1,8 @@
 <h1>Task一覧</h1>
+<%= notice %><br>
 <% @tasks.each do |task| %>
   <%= task.name %>
   <%= task.content %>
   <%= link_to "詳細", task_path(task.id) %>
+  <br>
 <% end %>
