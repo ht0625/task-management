@@ -6,7 +6,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         visit new_task_path
         fill_in 'task_name', with: 'テスト詳細名前'
         fill_in 'task_content', with: 'テスト詳細内容'
-        click_on 'Create Task'
+        click_on '登録する'
         expect(page).to have_content 'テスト詳細名前'
       end
     end
@@ -17,6 +17,16 @@ RSpec.describe 'タスク管理機能', type: :system do
         task = FactoryBot.create(:task, name: 'task-Rspec')
         visit tasks_path
         expect(page).to have_content 'task-Rspe'
+      end
+    end
+    context 'タスクが作成日時の降順に並んでいる場合' do
+      it '新しいタスクが一番上に表示される' do
+        task = FactoryBot.create(:task, name: '１つ目登録名前', content: '１つ目登録内容')
+        task = FactoryBot.create(:task, name: '２つ目登録名前', content: '２つ目登録内容')
+        visit tasks_path
+        task_list = all('.task')
+        expect(task_list[0]).to have_content '２つ目登録名前'
+        expect(task_list[1]).to have_content '１つ目登録名前'
       end
     end
   end
