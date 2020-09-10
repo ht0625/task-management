@@ -15,5 +15,6 @@
   <%= form.text_field :content %>
   <%= form.label :期限 %>
   <%= form.date_field :deadline %>
+  <%= form.select :status, [["未着手", "未着手"], ["着手中", "着手中"], ["完了", "完了"]] %>
   <%= form.submit %>
 <% end %>
