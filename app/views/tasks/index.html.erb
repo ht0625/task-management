@@ -4,7 +4,7 @@
   <%= f.label :name_key, 'タスク名' %>
   <%= f.text_field :name_key %>
   <%= f.label :status_key, 'ステータス' %>
-  <%= f.select :status_key, [["未着手", "未着手"], ["着手中", "着手中"], ["完了", "完了"]], include_blank: "ステータス検索" %>
+  <%= f.select :status_key, [["未着手", "未着手"], ["着手中", "着手中"], ["完了", "完了"]], include_blank: "選択なし" %>
   <%= f.submit '検索' %>
 <% end %>
 <% @tasks.each do |task| %>
