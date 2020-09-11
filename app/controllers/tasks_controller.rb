@@ -7,6 +7,17 @@ class TasksController < ApplicationController
     else
       @tasks = Task.all.order(created_at: :desc)
     end
+
+    if params[:task].present?
+      if params[:task][:name_key].present? && params[:task][:status_key].present?
+        @tasks = Task.name_search(params[:task][:name_key]).status_search(params[:task][:status_key])
+      elsif params[:task][:name_key].present?
+        @tasks = Task.name_search(params[:task][:name_key])
+      elsif params[:task][:status_key].present?
+        @tasks = Task.status_search(params[:task][:status_key])
+      end
+    end
+
   end
 
   def new

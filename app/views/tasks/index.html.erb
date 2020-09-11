@@ -1,5 +1,12 @@
 <h1>Task一覧</h1>
 <%= link_to "終了期限でソートする", tasks_path(sort_expired: "true") %>
+<%= form_with(scope: :task,url: tasks_path, method: :get, local: true) do |f| %>
+  <%= f.label :name_key, 'タスク名' %>
+  <%= f.text_field :name_key %>
+  <%= f.label :status_key, 'ステータス' %>
+  <%= f.select :status_key, [["未着手", "未着手"], ["着手中", "着手中"], ["完了", "完了"]], include_blank: "ステータス検索" %>
+  <%= f.submit '検索' %>
+<% end %>
 <% @tasks.each do |task| %>
 <div class = "task">
   <%= task.name %>
