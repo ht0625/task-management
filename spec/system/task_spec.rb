@@ -28,9 +28,9 @@ RSpec.describe 'タスク管理機能', type: :system do
         task = FactoryBot.create(:task, name: '１つ目登録名前', content: '１つ目登録内容')
         task = FactoryBot.create(:task, name: '２つ目登録名前', content: '２つ目登録内容')
         visit tasks_path
-        task_list = all('.task')
-        expect(task_list[0]).to have_content '２つ目登録名前'
-        expect(task_list[1]).to have_content '１つ目登録名前'
+        task_list = all('tr')
+        expect(task_list[1]).to have_content '２つ目登録名前'
+        expect(task_list[2]).to have_content '１つ目登録名前'
       end
     end
     context '終了期限でソートするボタンを押した場合' do
@@ -40,9 +40,9 @@ RSpec.describe 'タスク管理機能', type: :system do
         task = FactoryBot.create(:task, name: '２つ目登録名前', content: '２つ目登録内容')
         visit tasks_path
         click_on '終了期限でソートする'
-        task_list = all('.task')
-        expect(task_list[0]).to have_content tomorrow
-        expect(task_list[1]).to have_content Date.today
+        task_list = all('tr')
+        expect(task_list[1]).to have_content tomorrow
+        expect(task_list[2]).to have_content Date.today
       end
     end
     context '優先度でソートするボタンを押した場合' do
@@ -51,9 +51,9 @@ RSpec.describe 'タスク管理機能', type: :system do
         task = FactoryBot.create(:task, name: '２つ目登録名前', content: '２つ目登録内容')
         visit tasks_path
         click_on '優先度でソートする'
-        task_list = all('.task')
-        expect(task_list[0]).to have_content '高'
-        expect(task_list[1]).to have_content '中'
+        task_list = all('tr')
+        expect(task_list[1]).to have_content '高'
+        expect(task_list[2]).to have_content '中'
       end
     end
   end

@@ -11,6 +11,13 @@
 
   <body>
     <%= notice %><br>
+    <header>
+      <p>Task_Management</P>
+      <div class="header-link">
+        <%= link_to "タスク一覧", tasks_path %>
+        <%= link_to "タスク登録", new_task_path %>
+      </div>
+    </header>
     <%= yield %>
   </body>
 </html>
