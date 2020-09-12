@@ -50,7 +50,6 @@ RSpec.describe 'タスク管理機能', type: :system do
         task = FactoryBot.create(:task, name: '１つ目登録名前', content: '１つ目登録内容', priority: '高')
         task = FactoryBot.create(:task, name: '２つ目登録名前', content: '２つ目登録内容')
         visit tasks_path
-        binding.irb
         click_on '優先度でソートする'
         task_list = all('.task')
         expect(task_list[0]).to have_content '高'
