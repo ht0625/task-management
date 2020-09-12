@@ -17,5 +17,6 @@
   <%= form.date_field :deadline %>
   <%= form.label :ステータス %>
   <%= form.select :status, [["未着手", "未着手"], ["着手中", "着手中"], ["完了", "完了"]] %>
+  <%= form.select :priority, [["低", "低" ], ["中", "中"], ["高", "高"]] %>
   <%= form.submit %>
 <% end %>
