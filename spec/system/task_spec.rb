@@ -67,41 +67,39 @@ RSpec.describe 'タスク管理機能', type: :system do
        end
      end
   end
-  describe 'タスク管理機能', type: :system do
-    describe '検索機能' do
-      before do
-        FactoryBot.create(:task, name: "task")
-        FactoryBot.create(:task, name: "sample", status:'着手中')
+  describe '検索機能' do
+    before do
+      FactoryBot.create(:task, name: "task")
+      FactoryBot.create(:task, name: "sample", status:'着手中')
+    end
+    context 'タイトルであいまい検索をした場合' do
+      it "検索キーワードを含むタスクで絞り込まれる" do
+        visit tasks_path
+        fill_in 'task[name_key]', with: 'task'
+        click_on '検索'
+        expect(page).to have_content 'task'
+        expect(page).not_to have_content 'sample'
       end
-      context 'タイトルであいまい検索をした場合' do
-        it "検索キーワードを含むタスクで絞り込まれる" do
-          visit tasks_path
-          fill_in 'task[name_key]', with: 'task'
-          click_on '検索'
-          expect(page).to have_content 'task'
-          expect(page).not_to have_content 'sample'
-        end
+    end
+    context 'ステータス検索をした場合' do
+      it "ステータスに完全一致するタスクが絞り込まれる" do
+        visit tasks_path
+        select '着手中', from: 'task[status_key]'
+        click_on '検索'
+        expect(page).to have_content 'sample'
+        expect(page).not_to have_content 'task'
       end
-      context 'ステータス検索をした場合' do
-        it "ステータスに完全一致するタスクが絞り込まれる" do
-          visit tasks_path
-          select '着手中', from: 'task[status_key]'
-          click_on '検索'
-          expect(page).to have_content 'sample'
-          expect(page).not_to have_content 'task'
-        end
-      end
-      context 'タイトルのあいまい検索とステータス検索をした場合' do
-        it "検索キーワードをタイトルに含み、かつステータスに完全一致するタスク絞り込まれる" do
-          FactoryBot.create(:task, name: "task", status:'着手中')
-          visit tasks_path
-          fill_in 'task[name_key]', with: 'task'
-          select '着手中', from: 'task[status_key]'
-          click_on '検索'
-          expect(page).to have_content 'task'
-          expect(page).not_to have_content 'sample'
-          expect(all('.task').count).to eq 1
-        end
+    end
+    context 'タイトルのあいまい検索とステータス検索をした場合' do
+      it "検索キーワードをタイトルに含み、かつステータスに完全一致するタスク絞り込まれる" do
+        FactoryBot.create(:task, name: "task", status:'着手中')
+        visit tasks_path
+        fill_in 'task[name_key]', with: 'task'
+        select '着手中', from: 'task[status_key]'
+        click_on '検索'
+        expect(page).to have_content 'task'
+        expect(page).not_to have_content 'sample'
+        expect(all('.task').count).to eq 1
       end
     end
   end
