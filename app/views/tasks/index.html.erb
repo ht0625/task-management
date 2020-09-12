@@ -3,6 +3,7 @@
 <%= form_with(scope: :task,url: tasks_path, method: :get, local: true) do |f| %>
   <%= f.label :name_key, 'タスク名' %>
   <%= f.text_field :name_key %>
+
   <%= f.label :status_key, 'ステータス' %>
   <%= f.select :status_key, [["未着手", "未着手"], ["着手中", "着手中"], ["完了", "完了"]], include_blank: "選択なし" %>
   <%= f.submit '検索' %>
