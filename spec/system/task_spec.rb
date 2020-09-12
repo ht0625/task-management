@@ -45,6 +45,18 @@ RSpec.describe 'タスク管理機能', type: :system do
         expect(task_list[1]).to have_content Date.today
       end
     end
+    context '優先度でソートするボタンを押した場合' do
+      it '優先度の降順にソートされ表示される' do
+        task = FactoryBot.create(:task, name: '１つ目登録名前', content: '１つ目登録内容', priority: '高')
+        task = FactoryBot.create(:task, name: '２つ目登録名前', content: '２つ目登録内容')
+        visit tasks_path
+        binding.irb
+        click_on '優先度でソートする'
+        task_list = all('.task')
+        expect(task_list[0]).to have_content '高'
+        expect(task_list[1]).to have_content '中'
+      end
+    end
   end
   describe '詳細表示機能' do
      context '任意のタスク詳細画面に遷移した場合' do

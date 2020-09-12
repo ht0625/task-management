@@ -4,5 +4,6 @@ FactoryBot.define do
     content { 'test_content' }
     deadline { Date.today }
     status { '未着手' }
+    priority { '中' }
   end
 end
