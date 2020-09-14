@@ -12,7 +12,7 @@
 <% end %>
 
 <table>
-  <%= form_with(model: @user, local: true) do |f| %>
+  <%= form_with(model: [:admin,@user], local: true) do |f| %>
   <tr>
     <th><%= f.label :name %></th>
     <td><%= f.text_field :name %></td>
