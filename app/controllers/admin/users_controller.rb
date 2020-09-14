@@ -1,5 +1,5 @@
 class Admin::UsersController < ApplicationController
-  before_action :set_id, only: [:show, :edit, :update, :destroy]
+  before_action :set_id, only: [:edit, :update, :destroy]
   def index
     @users = User.all.order("created_at ASC")
   end
@@ -14,6 +14,17 @@ class Admin::UsersController < ApplicationController
       render :new
     end
   end
+
+  def edit
+  end
+  def update
+    if @user.update(user_params)
+      redirect_to admin_users_path, notice: "編集しました。"
+    else
+      render :edit
+    end
+  end
+
   def destroy
     @user.destroy
     redirect_to admin_users_path, notice: "削除しました。"
