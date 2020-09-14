@@ -1,4 +1,5 @@
 class Admin::UsersController < ApplicationController
+  before_action :set_id, only: [:show, :edit, :update, :destroy]
   def index
     @users = User.all.order("created_at ASC")
   end
@@ -13,7 +14,15 @@ class Admin::UsersController < ApplicationController
       render :new
     end
   end
+  def destroy
+    @user.destroy
+    redirect_to admin_users_path, notice: "削除しました。"
+  end
   private
+
+  def set_id
+    @user = User.find(params[:id])
+  end
 
   def user_params
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
