@@ -1,4 +1,5 @@
 class TasksController < ApplicationController
+  before_action :authenticate_user
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -17,8 +18,6 @@ class TasksController < ApplicationController
     else
       @tasks = Task.all.order(created_at: :desc).page(params[:page]).per(10)
     end
-
-
 
   end
 
