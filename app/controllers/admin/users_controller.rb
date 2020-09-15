@@ -1,7 +1,7 @@
 class Admin::UsersController < ApplicationController
   before_action :set_id, only: [:show,:edit, :update, :destroy]
   def index
-    @users = User.all.order("created_at ASC")
+    @users = User.select(:id, :name, :email, :created_at).includes(:tasks).order("created_at ASC")
   end
   def new
     @user = User.new
