@@ -1,5 +1,5 @@
 class Admin::UsersController < ApplicationController
-  before_action :set_id, only: [:edit, :update, :destroy]
+  before_action :set_id, only: [:show,:edit, :update, :destroy]
   def index
     @users = User.all.order("created_at ASC")
   end
@@ -14,7 +14,9 @@ class Admin::UsersController < ApplicationController
       render :new
     end
   end
-
+  def show
+    @tasks = @user.tasks.order(created_at: :desc)
+  end
   def edit
   end
   def update
