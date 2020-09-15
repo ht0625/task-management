@@ -13,7 +13,7 @@ class User < ApplicationRecord
 
   private
   def check_admin_update
-    if User.where(admin: true).count == 1 && self.admin == false
+    if User.where(admin: true).count == 1 && self.admin_change == [true, false]
       errors.add :base, '管理者がいなくなるため、このユーザーの権限は変更できません。'
       throw(:abort)
     end

@@ -5,5 +5,6 @@ FactoryBot.define do
     deadline { Date.today }
     status { '未着手' }
     priority { '中' }
+    user
   end
 end

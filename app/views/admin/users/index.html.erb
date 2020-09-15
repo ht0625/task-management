@@ -20,7 +20,7 @@
       <th></th>
     </tr>
     <% @users.each do |user| %>
-    <tr>
+    <tr id="task">
       <td class="task-name"><%= user.name %></td>
       <td class="user-email"><%= user.email %></td>
       <td class="user-task"><%= user.tasks.count %></td>
