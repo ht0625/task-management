@@ -7,4 +7,21 @@ class User < ApplicationRecord
   validates :password, length: { minimum: 6 }, on: [:create]
 
   has_many :tasks, dependent: :destroy
+
+  before_update :check_admin_update
+  before_destroy :check_admin_destroy
+
+  private
+  def check_admin_update
+    if User.where(admin: true).count == 1 && self.admin == false
+      errors.add :base, '管理者がいなくなるため、このユーザーの権限は変更できません。'
+      throw(:abort)
+    end
+  end
+  def check_admin_destroy
+    if User.where(admin: true).count == 1 && self.admin == true
+      errors.add :base, '管理者がいなくなるため、このユーザーは削除できません。'
+      throw(:abort)
+    end
+  end
 end

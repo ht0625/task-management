@@ -1,3 +1,13 @@
+<% if @user.present? %>
+  <div id="error_explanation">
+    <!-- <h2><%= pluralize(@user.errors.count, "error") %> prohibited this <%= @user.name %> from being saved:</h2> -->
+    <ul>
+    <% @user.errors.full_messages.each do |message| %>
+      <p><%= message %></p>
+    <% end %>
+    </ul>
+  </div>
+<% end %>
 <h2>アカウント一覧</h2>
   <table>
     <tr>
