@@ -1,5 +1,6 @@
 class Admin::UsersController < ApplicationController
   before_action :set_id, only: [:show,:edit, :update, :destroy]
+  before_action :admin_user?
   def index
     @users = User.select(:id, :name, :email, :created_at).includes(:tasks).order("created_at ASC")
   end
@@ -41,4 +42,9 @@ class Admin::UsersController < ApplicationController
     params.require(:user).permit(:name, :email, :password, :password_confirmation)
   end
 
+  def admin_user?
+    if current_user[:admin] != true
+      redirect_to tasks_path, notice: '管理者以外はアクセスできません'
+    end
+  end
 end
