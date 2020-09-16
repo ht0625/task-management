@@ -6,5 +6,6 @@
                email: email,
                password: password,
                password_confirmation: password,
+               admin: true
                )
 end
