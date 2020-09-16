@@ -1,6 +1,5 @@
 <% if @user.errors.any? %>
   <div id="error_explanation">
-    <!-- <h2><%= pluralize(@user.errors.count, "error") %> prohibited this <%= @user.name %> from being saved:</h2> -->
     <ul>
     <% @user.errors.full_messages.each do |message| %>
       <p><%= message %></p>
@@ -9,31 +8,31 @@
   </div>
 <% end %>
 
-<table>
-  <%= form_with(model: [:admin,@user], local: true) do |f| %>
-  <tr>
-    <th><%= f.label :name %></th>
-    <td><%= f.text_field :name %></td>
-  </tr>
-  <tr>
-    <th><%= f.label :email %></th>
-    <td><%= f.email_field :email %></td>
-  </tr>
-  <tr>
-    <th><%= f.label :admin %></th>
-    <td><%= f.check_box :admin %></td>
-  </tr>
-  <tr>
-    <th><%= f.label :password %></th>
-    <td><%= f.password_field :password %></td>
-  </tr>
-  <tr>
-    <th><%= f.label :password_confirmation %></th>
-    <td><%= f.password_field :password_confirmation %></td>
-  </tr>
-  <tr>
-    <th></th>
-    <td><%= f.submit "作成" %></td>
-  </tr>
-  <% end %>
-</table>
+<%= form_with(model: [:admin,@user], local: true) do |f| %>
+  <table>
+    <tr>
+      <th><%= f.label :name %></th>
+      <td><%= f.text_field :name %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :email %></th>
+      <td><%= f.email_field :email %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :admin %></th>
+      <td><%= f.check_box :admin %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :password %></th>
+      <td><%= f.password_field :password %></td>
+    </tr>
+    <tr>
+      <th><%= f.label :password_confirmation %></th>
+      <td><%= f.password_field :password_confirmation %></td>
+    </tr>
+    <tr>
+      <th></th>
+      <td><%= f.submit "作成" %></td>
+    </tr>
+  </table>
+<% end %>

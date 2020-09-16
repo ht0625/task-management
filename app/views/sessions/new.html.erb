@@ -1,6 +1,7 @@
 <h1>ログイン</h1>
-<table>
+
   <%= form_with(scope: :session, url: sessions_path, local: true) do |f| %>
+<table>
   <tr>
     <td><%= f.label :email %></td>
     <td><%= f.email_field :email %></td>
@@ -12,4 +13,3 @@
 </table><br>
   <%= f.submit "Log in" %>
   <% end %>
-</table>

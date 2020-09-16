@@ -122,7 +122,6 @@ RSpec.describe 'ユーザー管理機能', type: :system do
         fill_in 'session_password', with: 'test01'
         click_on 'Log in'
         visit admin_users_path
-        binding.irb
         page.accept_confirm do
           first('#task').click_link '削除'
         end

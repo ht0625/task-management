@@ -15,6 +15,7 @@
   </div><br>
 </div><br>
 
+
 <table>
   <tr>
     <th class="task-name">タスク名</th>
@@ -27,20 +28,21 @@
     <th></th>
   </tr>
   <% @tasks.each do |task| %>
-  <tr id="task">
-    <div class = "task">
-      <td class="task-name"><%= task.name %></td>
-      <td class="task-content"><%= task.content %></td>
-      <td class="task-column"><%= task.deadline %></td>
-      <td class="task-column"><%= task.status %></td>
-      <td class="task-column"><%= task.priority %></td>
-      <td><%= link_to "詳細", task_path(task.id), class: 'btn btn-primary'  %></td>
-      <td><%= link_to "編集", edit_task_path(task.id), class: "btn btn-success"  %></td>
-      <td><%= link_to "削除", task_path(task.id), method: :delete, class: "btn btn-danger", data: { confirm: '削除しますか？' }  %></td>
-    </div>
-  </tr>
+    <tr id="task">
+      <div class = "task">
+        <td class="task-name"><%= task.name %></td>
+        <td class="task-content"><%= task.content %></td>
+        <td class="task-column"><%= task.deadline %></td>
+        <td class="task-column"><%= task.status %></td>
+        <td class="task-column"><%= task.priority %></td>
+        <td><%= link_to "詳細", task_path(task.id), class: 'btn btn-primary'  %></td>
+        <td><%= link_to "編集", edit_task_path(task.id), class: "btn btn-success"  %></td>
+        <td><%= link_to "削除", task_path(task.id), method: :delete, class: "btn btn-danger", data: { confirm: '削除しますか？' }  %></td>
+      </div>
+    </tr>
   <% end %>
 </table>
+
 <div class="page">
 <%= paginate @tasks %>
 </div>
