@@ -6,4 +6,6 @@ class Task < ApplicationRecord
   scope :status_search, -> (status){ where(status: "#{status}")}
 
   enum priority:{  "低": 0, "中": 1, "高": 2 }
+
+  belongs_to :user
 end
