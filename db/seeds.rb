@@ -9,3 +9,8 @@
                admin: true
                )
 end
+(1..5).each do |n|
+  label_type = "label#{n}"
+  Label.create!(label_type: label_type,
+               )
+end
