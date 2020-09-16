@@ -13,6 +13,13 @@
       <%= f.submit '検索' %><br>
     <% end %>
   </div><br>
+  <div class="menu-right">
+  <%= form_with url: tasks_path, method: :get, local: true do |form| %>
+    <%= form.label :label_type, 'ラベル' %>
+    <%= form.select("label_id", Label.pluck(:label_type, :id), { include_blank: true }) %>
+    <%= form.submit '絞込み', name: nil %>
+  <% end %>
+  </div><br>
 </div><br>
 
 
