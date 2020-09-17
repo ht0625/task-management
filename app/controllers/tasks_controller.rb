@@ -3,22 +3,26 @@ class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy]
 
   def index
+
     if params[:sort_expired] == "true"
-      @tasks = current_user.tasks.order(deadline: :desc).page(params[:page]).per(10)
+      @tasks = current_user.tasks.order(deadline: :desc)
     elsif params[:sort_priority] == "true"
-      @tasks = current_user.tasks.order(priority: :desc).page(params[:page]).per(10)
+      @tasks = current_user.tasks.order(priority: :desc)
     elsif params[:task].present?
       if params[:task][:name_key].present? && params[:task][:status_key].present?
-        @tasks = current_user.tasks.name_search(params[:task][:name_key]).status_search(params[:task][:status_key]).page(params[:page]).per(10)
+        @tasks = current_user.tasks.name_search(params[:task][:name_key]).status_search(params[:task][:status_key])
       elsif params[:task][:name_key].present?
-        @tasks = current_user.tasks.name_search(params[:task][:name_key]).page(params[:page]).per(10)
+        @tasks = current_user.tasks.name_search(params[:task][:name_key])
       elsif params[:task][:status_key].present?
-        @tasks = current_user.tasks.status_search(params[:task][:status_key]).page(params[:page]).per(10)
+        @tasks = current_user.tasks.status_search(params[:task][:status_key])
+      else
+        @tasks = current_user.tasks.order(created_at: :desc)
       end
     else
-      @tasks = current_user.tasks.order(created_at: :desc).page(params[:page]).per(10)
+      @tasks = current_user.tasks.order(created_at: :desc)
     end
-
+    @tasks = @tasks.joins(:labels).where(labels: { id: params[:label_id] }) if params[:label_id].present?
+    @tasks = @tasks.page(params[:page]).per(10)
   end
 
   def new
@@ -58,7 +62,7 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:name, :content, :deadline, :status, :priority)
+    params.require(:task).permit(:name, :content, :deadline, :status, :priority,{ label_ids: [] })
   end
 
 end

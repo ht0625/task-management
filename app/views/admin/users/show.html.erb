@@ -1,18 +1,18 @@
 <h2><%= @user.name %>のページ</h2>
 <p>メールアドレス: <%= @user.email %></p>
 <% if @tasks.present? %>
-  <% @tasks.each do |task| %>
-    <table>
-      <tr>
-        <th class="task-name">タスク名</th>
-        <th class="task-content">内容</th>
-        <th class="task-column">期限</th>
-        <th class="task-column">ステータス</th>
-        <th class="task-column">優先度</th>
-        <th></th>
-        <th></th>
-        <th></th>
-      </tr>
+  <table>
+    <tr>
+      <th class="task-name">タスク名</th>
+      <th class="task-content">内容</th>
+      <th class="task-column">期限</th>
+      <th class="task-column">ステータス</th>
+      <th class="task-column">優先度</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+    <% @tasks.each do |task| %>
       <tr>
         <div class = "task">
           <td class="task-name"><%= task.name %></td>
@@ -25,8 +25,9 @@
           <td><%= link_to "削除", task_path(task.id), method: :delete, class: "btn btn-danger", data: { confirm: '削除しますか？' }  %></td>
         </div>
       </tr>
-    </table>
-  <% end %>
+    <% end %>
+  </table>
+
 <% else %>
   <h3>現在タスクはありません</h3>
 <% end %>

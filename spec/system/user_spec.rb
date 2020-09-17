@@ -71,7 +71,8 @@ RSpec.describe 'ユーザー管理機能', type: :system do
     end
     context '登録した一般ユーザで管理画面にアクセスした場合' do
       it '管理画面にアクセスできないこと' do
-        fill_in 'session_email', with: 'test1@example.com'
+        FactoryBot.create(:user,name:'admin',email:'test111@example.com')
+        fill_in 'session_email', with: 'test111@example.com'
         fill_in 'session_password', with: 'test01'
         click_on 'Log in'
         visit admin_users_path
@@ -101,7 +102,7 @@ RSpec.describe 'ユーザー管理機能', type: :system do
         fill_in 'session_password', with: 'test01'
         click_on 'Log in'
         visit admin_user_path(User.first)
-        expect(page).to have_content 'test1_nameのページ'
+        expect(page).to have_content 'adminのページ'
       end
     end
     context '登録した管理ユーザでユーザ編集しようとした場合' do
@@ -118,7 +119,8 @@ RSpec.describe 'ユーザー管理機能', type: :system do
     end
     context '登録した管理ユーザでユーザを削除しようとした場合' do
       it '削除できること' do
-        fill_in 'session_email', with: 'admin@example.com'
+        FactoryBot.create(:user,name:'サンプル',email:'test1111@example.com',admin: true)
+        fill_in 'session_email', with: 'test1111@example.com'
         fill_in 'session_password', with: 'test01'
         click_on 'Log in'
         visit admin_users_path
@@ -126,7 +128,7 @@ RSpec.describe 'ユーザー管理機能', type: :system do
           first('#task').click_link '削除'
         end
         expect(page).to have_content '削除しました'
-        expect(page).not_to have_content 'test1_name'
+        expect(page).not_to have_content 'admin'
       end
     end
   end
