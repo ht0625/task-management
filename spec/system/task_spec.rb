@@ -46,6 +46,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         FactoryBot.create(:task, name: '３つ目登録名前', content: '３つ目登録内容', deadline: tomorrow, user: user)
         visit tasks_path
         click_on '終了期限でソートする'
+        sleep 1.0
         task_list = all('tr')
         expect(task_list[1]).to have_content tomorrow
         expect(task_list[2]).to have_content Date.today
@@ -56,7 +57,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         task = FactoryBot.create(:task, name: '３つ目登録名前', content: '３つ目登録内容', priority: '高', user: user)
         visit tasks_path
         click_on '優先度でソートする'
-        sleep 0.8
+        sleep 1.0
         task_list = all('tr')
         expect(task_list[1]).to have_content '高'
         expect(task_list[2]).to have_content '中'
